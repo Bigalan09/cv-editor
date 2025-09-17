@@ -1,29 +1,29 @@
 :host {
-  display: block;
+    display: block;
 }
 
 .list-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: var(--list-item-margin-bottom, 0.75rem);
-  font-size: var(--font-size-list-item, 0.875rem);
-  line-height: var(--line-height-list-item, 1.5);
-  color: var(--color-primary, #666);
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: var(--list-item-margin-bottom, 0.25rem);
+    font-size: var(--font-size-list-item, 0.875rem);
+    line-height: var(--line-height-list-item, 1.4);
+    color: var(--color-primary, #666);
 }
 
 .bullet {
-  display: flex;
-  align-items: center;
-  min-width: 24px;
-  margin-right: 0.5rem;
-  margin-top: 0.1rem;
+    display: flex;
+    align-items: center;
+    min-width: 24px;
+    margin-right: 0.5rem;
+    margin-top: 0.1rem;
 }
 
 .bullet-text {
-  color: var(--color-bullet-color, #2c5f6f);
-  font-weight: bold;
+    color: var(--color-bullet-color, #2c5f6f);
+    font-weight: bold;
 }
 
 .content {
-  flex: 1;
+    flex: 1;
 }

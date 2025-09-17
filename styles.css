@@ -17,7 +17,7 @@
     --font-size-section-title: 1.125rem;
     --font-size-list-item: 0.875rem;
     --line-height-content: 1.6;
-    --line-height-list-item: 1.5;
+    --line-height-list-item: 1.4;
     --letter-spacing-name: 0.125em;
     --letter-spacing-job-role: 0.1875em;
     --letter-spacing-section-title: 0.125em;
@@ -27,7 +27,7 @@
     --spacing-section-title-margin-bottom: 1.2rem;
     --spacing-name-margin-bottom: 1.25rem;
     --spacing-job-role-margin-bottom: 0.9375rem;
-    --spacing-list-item-margin-bottom: 0.75rem;
+    --spacing-list-item-margin-bottom: 0.25rem;
     --spacing-list-item-padding-left: 1rem;
     --spacing-underline-width: 3rem;
     --spacing-underline-height: 0.1rem;
@@ -48,6 +48,15 @@ body {
     font-family: var(--font-family);
     font-size: var(--font-size-body);
     background-color: var(--color-body-background);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-light);
+
+    /* Help with centering web components */
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 2rem 0;
+    box-sizing: border-box;
 }
 
 /* CV Controls */
@@ -81,16 +90,6 @@ body {
 .edit-btn:active {
     transform: translateY(0);
     box-shadow: 0 2px 8px rgba(44, 95, 111, 0.3);
-}
-    color: var(--color-primary);
-    font-weight: var(--font-weight-light);
-
-    /* Help with centering web components */
-    display: flex;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 2rem 0;
-    box-sizing: border-box;
 }
 
 /* Print Styles */

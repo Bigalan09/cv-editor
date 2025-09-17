@@ -1,5 +1,5 @@
 import { serve } from "bun";
-import Handlebars from "handlebars";
+const Handlebars = require("handlebars");
 
 // Register JSON helper for handlebars
 Handlebars.registerHelper("json", function (context) {
@@ -103,10 +103,13 @@ serve({
             headers: { "Content-Type": "application/json" },
           });
         } catch (error) {
-          return new Response(JSON.stringify({ success: false, error: error.message }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          });
+          return new Response(
+            JSON.stringify({ success: false, error: error.message }),
+            {
+              status: 500,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
         }
       }
     }
@@ -133,33 +136,42 @@ serve({
           }
 
           // Validate data structure (basic validation)
-          if (!data || typeof data !== 'object') {
-            return new Response(JSON.stringify({
-              success: false,
-              error: "Invalid data format"
-            }), {
-              status: 400,
-              headers: { "Content-Type": "application/json" },
-            });
+          if (!data || typeof data !== "object") {
+            return new Response(
+              JSON.stringify({
+                success: false,
+                error: "Invalid data format",
+              }),
+              {
+                status: 400,
+                headers: { "Content-Type": "application/json" },
+              },
+            );
           }
 
           // Save the data
           await Bun.write("cv.json", JSON.stringify(data, null, 2));
 
-          return new Response(JSON.stringify({
-            success: true,
-            backupCreated
-          }), {
-            headers: { "Content-Type": "application/json" },
-          });
+          return new Response(
+            JSON.stringify({
+              success: true,
+              backupCreated,
+            }),
+            {
+              headers: { "Content-Type": "application/json" },
+            },
+          );
         } catch (error) {
-          return new Response(JSON.stringify({
-            success: false,
-            error: error.message
-          }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          });
+          return new Response(
+            JSON.stringify({
+              success: false,
+              error: error.message,
+            }),
+            {
+              status: 500,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
         }
       }
     }
@@ -167,7 +179,11 @@ serve({
     if (url.pathname === "/api/cv/backups") {
       if (req.method === "GET") {
         try {
-          const files = await Array.fromAsync(new Bun.Glob("cv.json.backup.*").scan("."));
+          const glob = new Bun.Glob("cv.json.backup.*");
+          const files = [];
+          for await (const file of glob.scan(".")) {
+            files.push(file);
+          }
           const backups = [];
 
           for (const filename of files) {
@@ -177,24 +193,33 @@ serve({
               backups.push({
                 filename,
                 timestamp: stat.mtime.toISOString(),
-                size: stat.size
+                size: stat.size,
               });
             } catch (fileError) {
-              console.warn(`Failed to stat backup file ${filename}:`, fileError.message);
+              console.warn(
+                `Failed to stat backup file ${filename}:`,
+                fileError.message,
+              );
             }
           }
 
           // Sort by timestamp descending (newest first)
-          backups.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+          backups.sort(
+            (a, b) =>
+              new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime(),
+          );
 
           return new Response(JSON.stringify({ success: true, backups }), {
             headers: { "Content-Type": "application/json" },
           });
         } catch (error) {
-          return new Response(JSON.stringify({ success: false, error: error.message }), {
-            status: 500,
-            headers: { "Content-Type": "application/json" },
-          });
+          return new Response(
+            JSON.stringify({ success: false, error: error.message }),
+            {
+              status: 500,
+              headers: { "Content-Type": "application/json" },
+            },
+          );
         }
       }
     }
