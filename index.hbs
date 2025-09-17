@@ -19,56 +19,50 @@
     </head>
     <body>
         <cv-display>
-            <cv-sidebar slot="sidebar" background-color="rgb(218, 228, 235)">
-                <div slot="header">
-                    <cv-profile-image src="{{profile.image}}"></cv-profile-image>
-                </div>
-                <div slot="content">
-                    <cv-section section-title="Contact">
-                        {{#each contact}}
-                        <cv-contact-item icon="{{icon}}">{{{text}}}</cv-contact-item>
-                        {{/each}}
-                    </cv-section>
+            <cv-profile-image slot="sidebar-header" src="{{profile.image}}"></cv-profile-image>
 
-                    <cv-section section-title="Skills">
-                        <cv-skills-list skills='{{json skills}}'></cv-skills-list>
-                    </cv-section>
+            <cv-header slot="main-header" name="{{profile.name}}" job-role="{{profile.jobRole}}">
+                {{profile.summary}}
+            </cv-header>
 
-                    <cv-section section-title="Interests">
-                        <cv-skills-list skills='{{json interests}}'></cv-skills-list>
-                    </cv-section>
+            <div slot="sidebar-content">
+                <cv-section section-title="Contact">
+                    {{#each contact}}
+                    <cv-contact-item icon="{{icon}}">{{{text}}}</cv-contact-item>
+                    {{/each}}
+                </cv-section>
 
-                    <cv-section section-title="References">
-                        <p style="font-size: 0.875rem; color: #666">
-                            {{references}}
-                        </p>
-                    </cv-section>
-                </div>
-            </cv-sidebar>
+                <cv-section section-title="Skills">
+                    <cv-skills-list skills='{{json skills}}'></cv-skills-list>
+                </cv-section>
 
-            <cv-main slot="main">
-                <div slot="header">
-                    <cv-header name="{{profile.name}}" job-role="{{profile.jobRole}}">
-                        {{profile.summary}}
-                    </cv-header>
-                </div>
-                <div slot="content">
-                    <cv-section section-title="Employment History">
-                        {{#each employment}}
-                        <cv-section-item
-                            heading="{{position}}"
-                            subheading="{{company}}"
-                            period="{{period}}">
-                            <cv-list>
-                                {{#each achievements}}
-                                <cv-list-item>{{this}}</cv-list-item>
-                                {{/each}}
-                            </cv-list>
-                        </cv-section-item>
-                        {{/each}}
-                    </cv-section>
-                </div>
-            </cv-main>
+                <cv-section section-title="Interests">
+                    <cv-skills-list skills='{{json interests}}'></cv-skills-list>
+                </cv-section>
+
+                <cv-section section-title="References">
+                    <p style="font-size: 0.875rem; color: #666">
+                        {{references}}
+                    </p>
+                </cv-section>
+            </div>
+
+            <div slot="main-content">
+                <cv-section section-title="Employment History">
+                    {{#each employment}}
+                    <cv-section-item
+                        heading="{{position}}"
+                        subheading="{{company}}"
+                        period="{{period}}">
+                        <cv-list>
+                            {{#each achievements}}
+                            <cv-list-item>{{this}}</cv-list-item>
+                            {{/each}}
+                        </cv-list>
+                    </cv-section-item>
+                    {{/each}}
+                </cv-section>
+            </div>
         </cv-display>
     </body>
 </html>

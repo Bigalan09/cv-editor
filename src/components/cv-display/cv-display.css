@@ -12,28 +12,47 @@
 .cv-container {
     display: grid;
     grid-template-columns: var(--grid-columns, 1fr 2fr);
-    grid-template-areas: "sidebar main";
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+        "sidebar-header main-header"
+        "sidebar-content main-content";
     min-height: 297mm; /* A4 height */
+    padding-left: var(--layout-padding-left, 1.5rem);
 }
 
-.cv-sidebar {
+.sidebar-header {
+    grid-area: sidebar-header;
     background: var(--sidebar-background, rgb(218, 228, 235));
     display: flex;
-    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1.2rem;
 }
 
-.cv-main {
+.main-header {
+    grid-area: main-header;
+    background-color: rgb(245, 245, 245);
+    padding: 1.2rem;
+    margin-top: 1.2rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.sidebar-content {
+    grid-area: sidebar-content;
+    background: var(--sidebar-background, rgb(218, 228, 235));
+    padding: 0 1.2rem 1.2rem 1.2rem;
     display: flex;
     flex-direction: column;
 }
 
-/* Apply grid-area to slotted content to fix shadow DOM issue */
-::slotted(cv-sidebar) {
-    grid-area: sidebar;
-}
-
-::slotted(cv-main) {
-    grid-area: main;
+.main-content {
+    grid-area: main-content;
+    background-color: white;
+    padding: 1.2rem;
+    display: flex;
+    flex-direction: column;
+    flex: 1;
 }
 
 /* Print optimisation */
