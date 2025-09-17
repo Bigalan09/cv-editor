@@ -1,0 +1,32 @@
+{
+  "name": "cv-editor",
+  "version": "1.0.0",
+  "description": "A CV editor built with StencilJS components",
+  "main": "dist/index.cjs.js",
+  "module": "dist/index.js",
+  "collection": "dist/collection/collection-manifest.json",
+  "types": "dist/types/index.d.ts",
+  "files": [
+    "dist/",
+    "loader/"
+  ],
+  "scripts": {
+    "build": "stencil build",
+    "dev": "stencil build --dev --watch --serve",
+    "start": "bun run server.ts",
+    "test": "stencil test --spec --e2e",
+    "test.watch": "stencil test --spec --e2e --watchAll",
+    "generate": "stencil generate"
+  },
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@stencil/core": "^4.37.0"
+  }
+}

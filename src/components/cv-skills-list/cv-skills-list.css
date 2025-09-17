@@ -1,0 +1,25 @@
+:host {
+  font-family: Poppins, sans-serif;
+  --bullet-color: #2c5f6f;
+}
+
+.skills-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skills-item {
+  margin-bottom: 0.375rem;
+  font-size: 0.875rem;
+  color: #666;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.skills-item::before {
+  content: "•";
+  color: var(--bullet-color);
+  position: absolute;
+  left: 0;
+}

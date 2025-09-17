@@ -1,0 +1,8 @@
+export { CvSidebar } from './components/cv-sidebar/cv-sidebar';
+export { CvMain } from './components/cv-main/cv-main';
+export { CvHeader } from './components/cv-header/cv-header';
+export { CvProfileImage } from './components/cv-profile-image/cv-profile-image';
+export { CvSection } from './components/cv-section/cv-section';
+export { CvContactItem } from './components/cv-contact-item/cv-contact-item';
+export { CvSkillsList } from './components/cv-skills-list/cv-skills-list';
+export { CvEmployment } from './components/cv-employment/cv-employment';

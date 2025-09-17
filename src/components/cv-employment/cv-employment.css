@@ -1,0 +1,58 @@
+:host {
+  font-family: Poppins, sans-serif;
+  --title-color: #2c5f6f;
+  --bullet-color: #2c5f6f;
+}
+
+.employment {
+  margin-bottom: 2.5rem;
+}
+
+.employment-position {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--title-color);
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+}
+
+.employment-company {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+
+.employment-period {
+  font-size: 0.875rem;
+  color: #999;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.employment-achievements {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1rem 0;
+}
+
+.employment-achievement {
+  margin-bottom: 0.75rem;
+  font-size: 0.875rem;
+  color: #666;
+  line-height: 1.5;
+  position: relative;
+  padding-left: 1rem;
+}
+
+.employment-achievement::before {
+  content: "•";
+  color: var(--bullet-color);
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.slot-content {
+  display: block;
+}
