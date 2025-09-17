@@ -8,11 +8,11 @@
   "contact": [
     {
       "icon": "phone",
-      "text": "+1 555 123 4567"
+      "text": "+44 20 1234 5678"
     },
     {
       "icon": "house",
-      "text": "123 Example Street,<br />Sample City, State<br />12345"
+      "text": "123 Example Street,<br />Sample Town, County<br />AB12 3CD"
     },
     {
       "icon": "mail",
@@ -56,7 +56,7 @@
       "achievements": [
         "Led a team of 4 developers to successfully deliver a critical product feature on schedule.",
         "Improved code quality through implementation of automated testing and code review processes.",
-        "Enhanced application performance by 40% through optimization efforts.",
+        "Enhanced application performance by 40% through optimisation efforts.",
         "Mentored junior developers and established best practices for the development team.",
         "Collaborated with cross-functional teams to define technical requirements and project scope."
       ]

@@ -1,7 +1,7 @@
 {
   "name": "cv-editor",
   "version": "1.0.0",
-  "description": "A CV editor built with StencilJS components",
+  "description": "Modern JSON-driven CV builder with StencilJS components and complete styling customisation",
   "main": "dist/index.cjs.js",
   "module": "dist/index.js",
   "collection": "dist/collection/collection-manifest.json",
