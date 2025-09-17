@@ -18,8 +18,8 @@
         <script type="module" src="/dist/cv-components/cv-components.esm.js"></script>
     </head>
     <body>
-        <div class="cv">
-            <cv-sidebar background-color="rgb(218, 228, 235)">
+        <cv-display>
+            <cv-sidebar slot="sidebar" background-color="rgb(218, 228, 235)">
                 <div slot="header">
                     <cv-profile-image src="{{profile.image}}"></cv-profile-image>
                 </div>
@@ -46,7 +46,7 @@
                 </div>
             </cv-sidebar>
 
-            <cv-main>
+            <cv-main slot="main">
                 <div slot="header">
                     <cv-header name="{{profile.name}}" job-role="{{profile.jobRole}}">
                         {{profile.summary}}
@@ -69,6 +69,6 @@
                     </cv-section>
                 </div>
             </cv-main>
-        </div>
+        </cv-display>
     </body>
 </html>

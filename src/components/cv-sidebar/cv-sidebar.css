@@ -1,18 +1,19 @@
 :host {
-  display: flex;
-  flex-direction: column;
-  grid-column: 1;
-  grid-row: 1 / 3;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .sidebar-header {
-  padding: 1.2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+    grid-area: sidebar-header;
+    padding: 1.2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .sidebar-content {
-  padding: 1.2rem;
-  flex: 1;
+    grid-area: sidebar-content;
+    padding: 1.2rem;
+    flex: 1;
 }

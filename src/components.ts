@@ -1,3 +1,4 @@
+export { CvDisplay } from "./components/cv-display/cv-display";
 export { CvSidebar } from "./components/cv-sidebar/cv-sidebar";
 export { CvMain } from "./components/cv-main/cv-main";
 export { CvHeader } from "./components/cv-header/cv-header";

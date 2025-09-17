@@ -50,18 +50,13 @@ body {
     background-color: var(--color-body-background);
     color: var(--color-primary);
     font-weight: var(--font-weight-light);
-}
 
-.cv {
-    display: grid;
-    grid-template-columns: var(--layout-grid-columns);
-    grid-template-rows: 1fr;
-    padding-left: var(--layout-padding-left);
-    width: var(--layout-cv-width);
-    margin: 0 auto;
-    height: 100%;
+    /* Help with centering web components */
+    display: flex;
+    justify-content: center;
     min-height: 100vh;
-    box-shadow: var(--layout-box-shadow);
+    padding: 2rem 0;
+    box-sizing: border-box;
 }
 
 /* Print Styles */
@@ -75,22 +70,16 @@ body {
         margin: 0;
         padding: 0;
         background: white !important;
+        display: block !important;
+        min-height: auto !important;
     }
 
-    .cv {
+    cv-display {
         width: var(--layout-cv-width) !important;
         max-width: none !important;
         margin: 0 !important;
-        padding-left: var(--layout-padding-left) !important;
         box-shadow: none !important;
-        min-height: auto !important;
-        height: auto !important;
         page-break-inside: avoid;
-    }
-
-    /* Hide everything except .cv */
-    body > *:not(.cv) {
-        display: none !important;
     }
 
     /* Ensure proper spacing for print */
