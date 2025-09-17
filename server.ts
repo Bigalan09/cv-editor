@@ -94,6 +94,112 @@ serve({
   async fetch(req) {
     const url = new URL(req.url);
 
+    // API Routes
+    if (url.pathname === "/api/cv/data") {
+      if (req.method === "GET") {
+        try {
+          const cvData = await cvDataFile.json();
+          return new Response(JSON.stringify({ success: true, data: cvData }), {
+            headers: { "Content-Type": "application/json" },
+          });
+        } catch (error) {
+          return new Response(JSON.stringify({ success: false, error: error.message }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          });
+        }
+      }
+    }
+
+    if (url.pathname === "/api/cv/save") {
+      if (req.method === "POST") {
+        try {
+          const requestData = await req.json();
+          const { data, createBackup } = requestData;
+
+          // Create backup if requested
+          let backupCreated = null;
+          if (createBackup) {
+            const timestamp = new Date().toISOString().replace(/[:.]/g, "-");
+            const backupFilename = `cv.json.backup.${timestamp}`;
+
+            try {
+              const currentContent = await cvDataFile.text();
+              await Bun.write(backupFilename, currentContent);
+              backupCreated = backupFilename;
+            } catch (backupError) {
+              console.warn("Failed to create backup:", backupError.message);
+            }
+          }
+
+          // Validate data structure (basic validation)
+          if (!data || typeof data !== 'object') {
+            return new Response(JSON.stringify({
+              success: false,
+              error: "Invalid data format"
+            }), {
+              status: 400,
+              headers: { "Content-Type": "application/json" },
+            });
+          }
+
+          // Save the data
+          await Bun.write("cv.json", JSON.stringify(data, null, 2));
+
+          return new Response(JSON.stringify({
+            success: true,
+            backupCreated
+          }), {
+            headers: { "Content-Type": "application/json" },
+          });
+        } catch (error) {
+          return new Response(JSON.stringify({
+            success: false,
+            error: error.message
+          }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          });
+        }
+      }
+    }
+
+    if (url.pathname === "/api/cv/backups") {
+      if (req.method === "GET") {
+        try {
+          const files = await Array.fromAsync(new Bun.Glob("cv.json.backup.*").scan("."));
+          const backups = [];
+
+          for (const filename of files) {
+            try {
+              const file = Bun.file(filename);
+              const stat = await file.stat();
+              backups.push({
+                filename,
+                timestamp: stat.mtime.toISOString(),
+                size: stat.size
+              });
+            } catch (fileError) {
+              console.warn(`Failed to stat backup file ${filename}:`, fileError.message);
+            }
+          }
+
+          // Sort by timestamp descending (newest first)
+          backups.sort((a, b) => new Date(b.timestamp).getTime() - new Date(a.timestamp).getTime());
+
+          return new Response(JSON.stringify({ success: true, backups }), {
+            headers: { "Content-Type": "application/json" },
+          });
+        } catch (error) {
+          return new Response(JSON.stringify({ success: false, error: error.message }), {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          });
+        }
+      }
+    }
+
+    // Main CV view route
     if (url.pathname === "/") {
       try {
         // Read template and data
@@ -115,6 +221,26 @@ serve({
       }
     }
 
+    // Edit route
+    if (url.pathname === "/edit") {
+      try {
+        const editTemplate = await Bun.file("edit.hbs").text();
+        const cvData = await cvDataFile.json();
+
+        const template = Handlebars.compile(editTemplate);
+        const html = template(cvData);
+
+        return new Response(html, {
+          headers: { "Content-Type": "text/html" },
+        });
+      } catch (error) {
+        return new Response(`Error rendering edit template: ${error.message}`, {
+          status: 500,
+          headers: { "Content-Type": "text/plain" },
+        });
+      }
+    }
+
     if (url.pathname === "/reset.css") {
       return new Response(Bun.file("reset.css"), {
         headers: { "Content-Type": "text/css" },
@@ -124,6 +250,18 @@ serve({
     if (url.pathname === "/styles.css") {
       return new Response(Bun.file("styles.css"), {
         headers: { "Content-Type": "text/css" },
+      });
+    }
+
+    if (url.pathname === "/edit-styles.css") {
+      return new Response(Bun.file("edit-styles.css"), {
+        headers: { "Content-Type": "text/css" },
+      });
+    }
+
+    if (url.pathname === "/editor.js") {
+      return new Response(Bun.file("editor.js"), {
+        headers: { "Content-Type": "application/javascript" },
       });
     }
 

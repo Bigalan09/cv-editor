@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en-GB">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Edit CV - {{profile.name}} - {{profile.jobRole}}</title>
+        <link rel="stylesheet" href="reset.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <link rel="stylesheet" href="edit-styles.css" />
+        <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+        <style>
+            {{{customCSS styling}}}
+        </style>
+        <script type="module" src="/dist/cv-components/cv-components.esm.js"></script>
+    </head>
+    <body>
+        <div id="edit-container">
+            <!-- Top Toolbar -->
+            <div id="toolbar">
+                <div class="toolbar-left">
+                    <h1>CV Editor</h1>
+                    <span id="save-status">Auto-saved</span>
+                </div>
+                <div class="toolbar-right">
+                    <a href="/" class="btn btn-secondary">View CV</a>
+                    <button id="create-backup-btn" class="btn btn-secondary">Create Backup</button>
+                    <button id="manual-save-btn" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+
+            <!-- Split View Container -->
+            <div id="split-container">
+                <!-- Left Panel - Editor -->
+                <div id="editor-panel">
+                    <!-- Editor Tabs -->
+                    <div id="editor-tabs">
+                        <button class="tab active" data-tab="json">JSON Editor</button>
+                        <button class="tab" data-tab="form">Form Editor</button>
+                    </div>
+
+                    <!-- JSON Editor Tab -->
+                    <div id="json-editor-container" class="editor-content active">
+                        <div id="json-editor" style="height: 100%; width: 100%;"></div>
+                    </div>
+
+                    <!-- Form Editor Tab -->
+                    <div id="form-editor-container" class="editor-content">
+                        <div id="form-editor">
+                            <div class="form-section">
+                                <h3>Profile</h3>
+                                <div class="form-group">
+                                    <label for="profile-name">Name</label>
+                                    <input type="text" id="profile-name" class="form-input" maxlength="100" />
+                                    <div class="char-count">0/100</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-job-role">Job Role</label>
+                                    <input type="text" id="profile-job-role" class="form-input" maxlength="150" />
+                                    <div class="char-count">0/150</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-summary">Summary</label>
+                                    <textarea id="profile-summary" class="form-textarea" maxlength="500" rows="4"></textarea>
+                                    <div class="char-count">0/500</div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="profile-image">Profile Image URL</label>
+                                    <input type="url" id="profile-image" class="form-input" />
+                                </div>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Sidebar Sections</h3>
+                                <div id="sidebar-sections"></div>
+                                <button class="btn btn-secondary add-section" data-target="sidebar">Add Section</button>
+                            </div>
+
+                            <div class="form-section">
+                                <h3>Main Sections</h3>
+                                <div id="main-sections"></div>
+                                <button class="btn btn-secondary add-section" data-target="main">Add Section</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Panel - Live Preview -->
+                <div id="preview-panel">
+                    <div id="preview-header">
+                        <h3>Live Preview</h3>
+                    </div>
+                    <div id="preview-content">
+                        <cv-display id="preview-cv">
+                            <cv-profile-image slot="sidebar-header" src="{{profile.image}}" id="preview-profile-image"></cv-profile-image>
+
+                            <cv-header slot="main-header" name="{{profile.name}}" job-role="{{profile.jobRole}}" id="preview-header-component">
+                                {{profile.summary}}
+                            </cv-header>
+
+                            <div slot="sidebar-content" id="preview-sidebar-content">
+                                {{#each sidebar}}
+                                <cv-generic-section section-title="{{title}}" subsections='{{json subsections}}'></cv-generic-section>
+                                {{/each}}
+                            </div>
+
+                            <div slot="main-content" id="preview-main-content">
+                                {{#each main}}
+                                <cv-generic-section section-title="{{title}}" subsections='{{json subsections}}'></cv-generic-section>
+                                {{/each}}
+                            </div>
+                        </cv-display>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Toast Notifications Container -->
+        <div id="toast-container"></div>
+
+        <!-- Initial CV Data -->
+        <script>
+            window.cvData = {{{json this}}};
+        </script>
+
+        <!-- Editor Script -->
+        <script type="module" src="editor.js"></script>
+    </body>
+</html>

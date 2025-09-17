@@ -4,13 +4,13 @@ A streamlined, component-based CV builder powered by StencilJS web components an
 
 ## ✨ Key Features
 
-- **🧩 Component Architecture** - Reusable StencilJS web components with shadow DOM encapsulation
-- **📝 JSON-Driven Content** - Separate content from presentation with structured JSON data files
+- **🧩 Generic Component System** - Universal section architecture works for any CV layout
+- **📝 JSON-Driven Content** - Unified sidebar/main structure with flexible subsections
 - **🎨 Complete Style Control** - Customise colours, typography, spacing, and layout through JSON configuration
-- **🖨️ Print-Ready** - Perfect A4 formatting with print-optimised CSS
-- **🔒 PII Protection** - Example templates prevent accidental exposure of personal information
+- **🖨️ Print-Ready** - Perfect A4 formatting with hidden edit controls in print
+- **🔒 PII Protection** - Example templates and backup patterns prevent accidental exposure
 - **⚡ Modern Stack** - Bun runtime, Handlebars templating, CSS custom properties
-- **🎯 Consistent Icons** - Integrated Tabler Icons with dedicated component system
+- **🎯 Flexible Bullets** - Support for icons, text bullets, and custom markers
 
 ## 🛠️ Tech Stack
 
@@ -37,20 +37,19 @@ Copy `cv.json.example` to `cv.json` and customise with your information and styl
 
 ## 📦 Components
 
-### Layout Components
-- **`cv-sidebar`** - Sidebar container with background colour customisation
-- **`cv-main`** - Main content area with header and content sections
-
-### Content Components
-- **`cv-header`** - Professional header with name, job role, and description
+### Core Layout
+- **`cv-display`** - Main container with grid layout and slots
+- **`cv-header`** - Professional header with name, job role, and summary
 - **`cv-profile-image`** - Circular profile image with customisable source
-- **`cv-section`** - Reusable section with title and content area
-- **`cv-contact-item`** - Contact information item with icon and content
-- **`cv-skills-list`** - Bulleted list for skills or interests
-- **`cv-section-item`** - Generic section item with heading, subheading, and period
-- **`cv-list`** - Unstyled list container for clean list markup
-- **`cv-list-item`** - Individual list item with customisable bullet styling
-- **`cv-icon`** - Consistent icon system with dedicated SVG icons
+
+### Universal Section System
+- **`cv-generic-section`** - Universal section container for both sidebar and main content
+- **`cv-subsection`** - Handles both sidebar lists and main content items with title/subtitle/period
+- **`cv-section`** - Basic section wrapper with title styling
+- **`cv-section-item`** - Employment/education item with heading, subheading, period
+- **`cv-list`** - Clean list container for bullet points
+- **`cv-list-item-generic`** - Flexible list items supporting icons or text bullets
+- **`cv-icon`** - Consistent icon system (phone, house, mail, github, linkedin)
 
 ## 📜 Scripts
 
@@ -83,9 +82,9 @@ bun run generate
 
 ## 🎯 Usage
 
-### Content Management
+### Generic Section Structure
 
-All CV content is stored in `cv.json` for easy editing:
+All CV content uses a unified sidebar/main structure:
 
 ```json
 {
@@ -95,26 +94,62 @@ All CV content is stored in `cv.json` for easy editing:
     "summary": "Your professional summary...",
     "image": "path/to/your/image.jpg"
   },
-  "contact": [
-    { "icon": "phone", "text": "+44 123 456 7890" },
-    { "icon": "mail", "text": "email@example.com" },
-    { "icon": "github", "text": "github.com/username" },
-    { "icon": "linkedin", "text": "in/username" }
-  ],
-  "skills": ["JavaScript", "TypeScript", "React"],
-  "interests": ["Photography", "Hiking"],
-  "employment": [
+  "sidebar": [
     {
-      "position": "Senior Developer",
-      "company": "Tech Corp", 
-      "period": "2020 - Present",
-      "achievements": [
-        "Led team of 5 developers",
-        "Increased performance by 40%"
-      ]
+      "title": "Contact",
+      "subsections": [{
+        "content": {
+          "type": "list",
+          "data": [
+            {"bullet": {"icon": "phone"}, "value": "+44 20 1234 5678"},
+            {"bullet": {"icon": "mail"}, "value": "email@example.com"},
+            {"bullet": {"icon": "github"}, "value": "github.com/username"}
+          ]
+        }
+      }]
+    },
+    {
+      "title": "Skills", 
+      "subsections": [{
+        "content": {
+          "type": "list",
+          "data": [
+            {"bullet": "•", "value": "JavaScript"},
+            {"bullet": "•", "value": "TypeScript"},
+            {"bullet": "•", "value": "React"}
+          ]
+        }
+      }]
     }
   ],
-  "references": "Available upon request",
+  "main": [
+    {
+      "title": "Employment History",
+      "subsections": [
+        {
+          "title": "Senior Developer",
+          "subtitle": "Tech Corp",
+          "period": "2020 - Present", 
+          "content": {
+            "type": "list",
+            "data": [
+              {"bullet": "•", "value": "Led team of 5 developers"},
+              {"bullet": "•", "value": "Increased performance by 40%"}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "References",
+      "subsections": [{
+        "content": {
+          "type": "text",
+          "data": "Available upon request"
+        }
+      }]
+    }
+  ],
   "styling": {
     "colors": {
       "primary": "#666",
@@ -188,112 +223,59 @@ All CV content is stored in `cv.json` for easy editing:
 
 ### Template Structure
 
-The application uses Handlebars templating with `index.hbs`:
+The application uses a simple Handlebars template with universal sections:
 
 ```handlebars
-<cv-header name="{{profile.name}}" job-role="{{profile.jobRole}}">
-  {{profile.summary}}
-</cv-header>
-
-{{#each employment}}
-<cv-section-item heading="{{position}}" subheading="{{company}}" period="{{period}}">
-  <cv-list>
-    {{#each achievements}}
-    <cv-list-item>{{this}}</cv-list-item>
+<cv-display>
+  <cv-profile-image slot="sidebar-header" src="{{profile.image}}"></cv-profile-image>
+  <cv-header slot="main-header" name="{{profile.name}}" job-role="{{profile.jobRole}}">
+    {{profile.summary}}
+  </cv-header>
+  
+  <div slot="sidebar-content">
+    {{#each sidebar}}
+    <cv-generic-section section-title="{{title}}" subsections='{{json subsections}}'></cv-generic-section>
     {{/each}}
-  </cv-list>
-</cv-section-item>
-{{/each}}
+  </div>
+  
+  <div slot="main-content">
+    {{#each main}}
+    <cv-generic-section section-title="{{title}}" subsections='{{json subsections}}'></cv-generic-section>
+    {{/each}}
+  </div>
+</cv-display>
 ```
 
-### Component Usage
-```html
-<!doctype html>
-<html lang="en-GB">
-<head>
-    <script type="module" src="/dist/cv-components/cv-components.esm.js"></script>
-</head>
-<body>
-    <div class="cv">
-        <cv-sidebar background-color="rgb(218, 228, 235)">
-            <div slot="header">
-                <cv-profile-image src="path/to/image.jpg"></cv-profile-image>
-            </div>
-            <div slot="content">
-                <cv-section section-title="Contact">
-                    <cv-contact-item icon="phone">+44 123 456 7890</cv-contact-item>
-                    <cv-contact-item icon="mail">email@example.com</cv-contact-item>
-                </cv-section>
-            </div>
-        </cv-sidebar>
+### Flexible Bullet System
 
-        <cv-main>
-            <div slot="header">
-                <cv-header name="John Smith" job-role="Software Engineer">
-                    Professional summary goes here...
-                </cv-header>
-            </div>
-            <div slot="content">
-                <cv-section section-title="Experience">
-                    <cv-section-item 
-                        heading="Senior Developer"
-                        subheading="Tech Corp"
-                        period="2020 - Present">
-                        <cv-list>
-                            <cv-list-item>Led team of 5 developers</cv-list-item>
-                            <cv-list-item>Increased performance by 40%</cv-list-item>
-                        </cv-list>
-                    </cv-section-item>
-                </cv-section>
-            </div>
-        </cv-main>
-    </div>
-</body>
-</html>
-```
+The new generic system supports multiple bullet types:
 
-### Component Props
+- **Icons**: `{"bullet": {"icon": "phone"}, "value": "Contact info"}`
+- **Text bullets**: `{"bullet": "•", "value": "List item"}`  
+- **Custom bullets**: `{"bullet": "-", "value": "Custom marker"}`
 
-#### cv-sidebar
-- `background-color`: Background colour for the sidebar (default: "rgb(218, 228, 235)")
+### Key Component Props
+
+#### cv-generic-section
+- `section-title`: Section heading text
+- `subsections`: JSON string of subsection data
+
+#### cv-subsection
+- `heading`: Item title (for main sections)
+- `subtitle`: Secondary text (company/institution)
+- `period`: Date range
+- `content`: JSON string of content data
+
+#### cv-list-item-generic
+- `bullet`: JSON string of bullet data (icon object or text)
+- `value`: List item content
 
 #### cv-header
 - `name`: Person's full name
 - `job-role`: Current position title
-- `color`: Text colour for name and job role (default: "#2c5f6f")
 
 #### cv-profile-image
-- `src`: Image source URL (default: placeholder)
-- `alt`: Alt text for the image
-
-#### cv-section
-- `section-title`: Title for the section
-- `color`: Colour for the title and underline (default: "#2c5f6f")
-
-#### cv-contact-item
-- `icon`: Icon name (phone, house, mail, github, linkedin)
-
-#### cv-skills-list
-- `skills`: JSON array of skills/interests
-- `bullet-color`: Colour for bullet points (default: "#2c5f6f")
-
-#### cv-section-item
-- `heading`: Main heading text (e.g., job position)
-- `subheading`: Secondary text (e.g., company name)
-- `period`: Time period or date range
-- `heading-color`: Colour for the heading text (default: "#2c5f6f")
-
-#### cv-list
-- No props - pure container component
-
-#### cv-list-item
-- `bullet-color`: Colour for the bullet point (default: "#2c5f6f")
-
-#### cv-icon
-- `icon`: Icon name (phone, house, mail, github, linkedin)
-- `size`: Icon size in pixels (default: 20)
-- `stroke`: Stroke width (default: 2)
-- `color`: Icon colour (default: "currentColor")
+- `src`: Image source URL
 
 ## 🎨 Styling System
 
@@ -343,10 +325,16 @@ src/components/
 cv-editor/
 ├── src/
 │   ├── components/          # StencilJS components
+│   │   ├── cv-display/      # Main layout container
+│   │   ├── cv-generic-section/ # Universal section system
+│   │   ├── cv-subsection/   # Subsection handler
+│   │   ├── cv-list-item-generic/ # Flexible list items
+│   │   └── ...
 │   ├── components.ts        # Component exports
 │   └── index.ts            # Main entry point
 ├── dist/                   # Built components
 ├── cv.json                 # CV content data (gitignored)
+├── cv.json.backup.*.json   # Backup files (gitignored)
 ├── cv.json.example         # Example template
 ├── index.hbs               # Handlebars template
 ├── server.ts               # Bun server with Handlebars rendering

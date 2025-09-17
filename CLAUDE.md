@@ -135,22 +135,21 @@ bun run server.ts
 bun --hot server.ts
 ```
 
-### Complete Component System
+### Generic Component System
 
-**Layout Components:**
-- `cv-sidebar` - Sidebar container with configurable background color and header/content slots
-- `cv-main` - Main content area with header and content sections
-
-**Content Components:**
-- `cv-header` - Professional header with name, job role, color props, and content slot for summary
+**Core Layout:**
+- `cv-display` - Main container with grid layout and slots
+- `cv-header` - Professional header with name, job role, and summary
 - `cv-profile-image` - Circular profile image with customisable source
-- `cv-section` - Reusable section with section-title prop and content slot
-- `cv-section-item` - Generic employment/experience item with heading, subheading, period props and content slot
-- `cv-contact-item` - Contact information with icon prop and content
-- `cv-skills-list` - Skills/interests list with skills JSON array prop
-- `cv-list` - Clean, unstyled list container (replaces inline styles)
-- `cv-list-item` - Individual list item with customisable bullet-color prop
-- `cv-icon` - Consistent icon system with dedicated SVG icons (phone, house, mail, github, linkedin)
+
+**Universal Section System:**
+- `cv-generic-section` - Universal section container for both sidebar and main content
+- `cv-subsection` - Handles both sidebar lists and main content items with title/subtitle/period
+- `cv-section` - Basic section wrapper with title styling
+- `cv-section-item` - Employment/education item with heading, subheading, period
+- `cv-list` - Clean list container for bullet points
+- `cv-list-item-generic` - Flexible list items supporting icons or text bullets
+- `cv-icon` - Consistent icon system (phone, house, mail, github, linkedin)
 
 ### JSON-Driven Styling System
 
@@ -206,9 +205,53 @@ Complete styling control through `cv.json` styling section:
 - Handlebars `customCSS` helper injects styling as CSS variables
 - Shadow DOM encapsulation with global CSS variable inheritance
 
+### Generic Section Structure
+
+**Unified JSON Schema:**
+```json
+{
+  "sidebar": [
+    {
+      "title": "Contact",
+      "subsections": [{
+        "content": {
+          "type": "list",
+          "data": [
+            {"bullet": {"icon": "phone"}, "value": "+44 20 1234 5678"},
+            {"bullet": "•", "value": "Skills or interests"}
+          ]
+        }
+      }]
+    }
+  ],
+  "main": [
+    {
+      "title": "Employment History", 
+      "subsections": [{
+        "title": "Senior Software Engineer",
+        "subtitle": "Company Name",
+        "period": "Jan 2020 - Present",
+        "content": {
+          "type": "list",
+          "data": [
+            {"bullet": "•", "value": "Achievement description"}
+          ]
+        }
+      }]
+    }
+  ]
+}
+```
+
+**Flexible Bullet System:**
+- **Icons**: `{"bullet": {"icon": "phone"}, "value": "Contact info"}`
+- **Text bullets**: `{"bullet": "•", "value": "List item"}`
+- **Custom bullets**: `{"bullet": "-", "value": "Custom marker"}`
+
 ### PII Protection
 
 - `cv.json` contains personal data and is gitignored
+- `cv.json.backup.*.json` backup files also ignored
 - `cv.json.example` provides safe template with placeholder data
 - Git history cleaned of personal information using `git filter-branch`
 - Perfect for private repository version control
@@ -234,16 +277,24 @@ Consistent Tabler Icons via `cv-icon` component:
 
 **Template Structure:**
 ```handlebars
-<cv-sidebar background-color="{{styling.components.sidebar.backgroundColor}}">
-  <div slot="header">
-    <cv-profile-image src="{{profile.image}}"></cv-profile-image>
-  </div>
-  <div slot="content">
-    {{#each contact}}
-    <cv-contact-item icon="{{icon}}">{{{text}}}</cv-contact-item>
+<cv-display>
+  <cv-profile-image slot="sidebar-header" src="{{profile.image}}"></cv-profile-image>
+  <cv-header slot="main-header" name="{{profile.name}}" job-role="{{profile.jobRole}}">
+    {{profile.summary}}
+  </cv-header>
+  
+  <div slot="sidebar-content">
+    {{#each sidebar}}
+    <cv-generic-section section-title="{{title}}" subsections='{{json subsections}}'></cv-generic-section>
     {{/each}}
   </div>
-</cv-sidebar>
+  
+  <div slot="main-content">
+    {{#each main}}
+    <cv-generic-section section-title="{{title}}" subsections='{{json subsections}}'></cv-generic-section>
+    {{/each}}
+  </div>
+</cv-display>
 ```
 
 ### Development Workflow
@@ -260,12 +311,16 @@ Consistent Tabler Icons via `cv-icon` component:
 cv-editor/
 ├── src/
 │   ├── components/          # StencilJS components
-│   │   ├── cv-sidebar/      # Layout components
-│   │   ├── cv-header/       # Content components  
+│   │   ├── cv-display/      # Main layout container
+│   │   ├── cv-header/       # Header component
+│   │   ├── cv-generic-section/ # Universal section system
+│   │   ├── cv-subsection/   # Subsection handler
+│   │   ├── cv-list-item-generic/ # Flexible list items
 │   │   ├── cv-icon/         # Icon system
 │   │   └── ...
 │   └── components.ts        # Component exports
 ├── cv.json                  # Personal CV data (gitignored)
+├── cv.json.backup.*.json   # Backup files (gitignored)
 ├── cv.json.example         # Safe template file
 ├── index.hbs               # Handlebars template with CSS injection
 ├── server.ts               # Bun server with styling generation
