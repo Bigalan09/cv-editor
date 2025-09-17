@@ -8,3 +8,4 @@ export { CvSkillsList } from "./components/cv-skills-list/cv-skills-list";
 export { CvSectionItem } from "./components/cv-section-item/cv-section-item";
 export { CvList } from "./components/cv-list/cv-list";
 export { CvListItem } from "./components/cv-list-item/cv-list-item";
+export { CvIcon } from "./components/cv-icon/cv-icon";

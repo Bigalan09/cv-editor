@@ -42,3 +42,6 @@ src/components.d.ts
 
 # Auto-generated component docs
 src/components/*/readme.md
+
+# Personal CV data (contains PII)
+cv.json

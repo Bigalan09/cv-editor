@@ -28,6 +28,7 @@
   },
   "dependencies": {
     "@stencil/core": "^4.37.0",
+    "@tabler/icons-react": "^3.35.0",
     "handlebars": "^4.7.8"
   }
 }
