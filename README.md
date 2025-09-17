@@ -7,6 +7,8 @@ A modern CV/Resume editor built with StencilJS components featuring shadow DOM a
 - **Shadow DOM Encapsulation**: Each component has isolated styles preventing CSS conflicts
 - **Slot-based Architecture**: Flexible content insertion with named and default slots
 - **Customizable Props**: Color schemes, background colors, and data binding through properties
+- **Content/Presentation Separation**: All CV content stored in JSON, rendered via Handlebars templates
+- **Data-Driven Rendering**: Easy content updates by editing cv.json file
 - **Print-Ready**: Optimized CSS for A4 print format
 - **Modular Design**: Reusable components that can be used across different projects
 - **TypeScript Support**: Full TypeScript definitions for all components
@@ -66,7 +68,60 @@ bun run generate
 
 ## 🎯 Usage
 
-### Basic HTML Structure
+### Content Management
+
+All CV content is stored in `cv.json` for easy editing:
+
+```json
+{
+  "profile": {
+    "name": "Your Name",
+    "jobRole": "Your Job Title", 
+    "summary": "Your professional summary...",
+    "image": "path/to/your/image.jpg"
+  },
+  "contact": [
+    { "icon": "📱", "text": "+1 234 567 8900" },
+    { "icon": "✉️", "text": "email@example.com" }
+  ],
+  "skills": ["JavaScript", "TypeScript", "React"],
+  "interests": ["Photography", "Hiking"],
+  "employment": [
+    {
+      "position": "Senior Developer",
+      "company": "Tech Corp", 
+      "period": "2020 - Present",
+      "achievements": [
+        "Led team of 5 developers",
+        "Increased performance by 40%"
+      ]
+    }
+  ],
+  "references": "Available upon request"
+}
+```
+
+### Template Structure
+
+The application uses Handlebars templating with `index.hbs`:
+
+```handlebars
+<cv-header name="{{profile.name}}" job-role="{{profile.jobRole}}">
+  {{profile.summary}}
+</cv-header>
+
+{{#each employment}}
+<cv-section-item heading="{{position}}" subheading="{{company}}" period="{{period}}">
+  <cv-list>
+    {{#each achievements}}
+    <cv-list-item>{{this}}</cv-list-item>
+    {{/each}}
+  </cv-list>
+</cv-section-item>
+{{/each}}
+```
+
+### Component Usage
 ```html
 <!doctype html>
 <html lang="en">
@@ -188,8 +243,9 @@ cv-editor/
 │   ├── components.ts        # Component exports
 │   └── index.ts            # Main entry point
 ├── dist/                   # Built components
-├── index.html              # Demo/main HTML file
-├── server.ts               # Development server
+├── cv.json                 # CV content data
+├── index.hbs               # Handlebars template
+├── server.ts               # Bun server with Handlebars rendering
 ├── styles.css              # Global styles
 ├── reset.css               # CSS reset
 └── stencil.config.ts       # StencilJS configuration

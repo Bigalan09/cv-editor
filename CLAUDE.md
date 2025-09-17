@@ -104,3 +104,52 @@ bun --hot ./index.ts
 ```
 
 For more information, read the Bun API docs in `node_modules/bun-types/docs/**.md`.
+
+## CV Editor Project
+
+This is a CV editor built with StencilJS components and Handlebars templating.
+
+### Architecture
+
+- **Components**: StencilJS web components with shadow DOM in `src/components/`
+- **Content**: All CV content stored in `cv.json` for easy editing
+- **Template**: Handlebars template `index.hbs` for rendering
+- **Server**: Bun server in `server.ts` renders template with JSON data
+
+### Development
+
+```bash
+# Install dependencies
+bun install
+
+# Build components
+bun run build
+
+# Start development server
+bun run start
+```
+
+### Key Components
+
+- `cv-sidebar` - Sidebar with background color prop
+- `cv-main` - Main content area
+- `cv-header` - Header with name, job role, and summary
+- `cv-section` - Reusable sections with titles
+- `cv-section-item` - Generic items with heading, subheading, period
+- `cv-list` - Unstyled list container
+- `cv-list-item` - List items with bullet styling
+- `cv-contact-item` - Contact items with icons
+- `cv-skills-list` - Skills/interests with JSON array prop
+- `cv-profile-image` - Profile image component
+
+### Content Management
+
+Edit `cv.json` to update CV content:
+- `profile` - Name, job role, summary, image
+- `contact` - Contact information with icons
+- `skills` - Array of skills
+- `interests` - Array of interests  
+- `employment` - Array of employment history
+- `references` - References text
+
+The Handlebars template automatically renders the updated content.
