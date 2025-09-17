@@ -23,7 +23,9 @@ A modern CV/Resume editor built with StencilJS components featuring shadow DOM a
 - **`cv-section`** - Reusable section with title and content area
 - **`cv-contact-item`** - Contact information item with icon and content
 - **`cv-skills-list`** - Bulleted list for skills or interests
-- **`cv-employment`** - Employment history entry with achievements
+- **`cv-section-item`** - Generic section item with heading, subheading, and period
+- **`cv-list`** - Unstyled list container for clean list markup
+- **`cv-list-item`** - Individual list item with customizable bullet styling
 
 ## 🛠️ Installation
 
@@ -93,12 +95,15 @@ bun run generate
             </div>
             <div slot="content">
                 <cv-section section-title="Experience">
-                    <cv-employment 
-                        position="Senior Developer"
-                        company="Tech Corp"
-                        period="2020 - Present"
-                        achievements='["Led team of 5 developers", "Increased performance by 40%"]'>
-                    </cv-employment>
+                    <cv-section-item 
+                        heading="Senior Developer"
+                        subheading="Tech Corp"
+                        period="2020 - Present">
+                        <cv-list>
+                            <cv-list-item>Led team of 5 developers</cv-list-item>
+                            <cv-list-item>Increased performance by 40%</cv-list-item>
+                        </cv-list>
+                    </cv-section-item>
                 </cv-section>
             </div>
         </cv-main>
@@ -132,13 +137,17 @@ bun run generate
 - `skills`: JSON array of skills/interests
 - `bullet-color`: Color for bullet points (default: "#2c5f6f")
 
-#### cv-employment
-- `position`: Job position
-- `company`: Company name
-- `period`: Employment period
-- `achievements`: JSON array of achievements
-- `title-color`: Color for position title (default: "#2c5f6f")
-- `bullet-color`: Color for achievement bullets (default: "#2c5f6f")
+#### cv-section-item
+- `heading`: Main heading text (e.g., job position)
+- `subheading`: Secondary text (e.g., company name)
+- `period`: Time period or date range
+- `heading-color`: Color for the heading text (default: "#2c5f6f")
+
+#### cv-list
+- No props - pure container component
+
+#### cv-list-item
+- `bullet-color`: Color for the bullet point (default: "#2c5f6f")
 
 ## 🎨 Styling
 

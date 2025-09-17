@@ -9,23 +9,6 @@ export namespace Components {
     interface CvContactItem {
         "icon": string;
     }
-    interface CvEmployment {
-        /**
-          * @default []
-         */
-        "achievements": string[];
-        /**
-          * @default '#2c5f6f'
-         */
-        "bulletColor": string;
-        "company": string;
-        "period": string;
-        "position": string;
-        /**
-          * @default '#2c5f6f'
-         */
-        "titleColor": string;
-    }
     interface CvHeader {
         /**
           * @default '#2c5f6f'
@@ -33,6 +16,14 @@ export namespace Components {
         "color": string;
         "jobRole": string;
         "name": string;
+    }
+    interface CvList {
+    }
+    interface CvListItem {
+        /**
+          * @default '#2c5f6f'
+         */
+        "bulletColor": string;
     }
     interface CvMain {
     }
@@ -52,6 +43,15 @@ export namespace Components {
          */
         "color": string;
         "sectionTitle": string;
+    }
+    interface CvSectionItem {
+        "heading": string;
+        /**
+          * @default '#2c5f6f'
+         */
+        "headingColor": string;
+        "period": string;
+        "subheading": string;
     }
     interface CvSidebar {
         /**
@@ -77,17 +77,23 @@ declare global {
         prototype: HTMLCvContactItemElement;
         new (): HTMLCvContactItemElement;
     };
-    interface HTMLCvEmploymentElement extends Components.CvEmployment, HTMLStencilElement {
-    }
-    var HTMLCvEmploymentElement: {
-        prototype: HTMLCvEmploymentElement;
-        new (): HTMLCvEmploymentElement;
-    };
     interface HTMLCvHeaderElement extends Components.CvHeader, HTMLStencilElement {
     }
     var HTMLCvHeaderElement: {
         prototype: HTMLCvHeaderElement;
         new (): HTMLCvHeaderElement;
+    };
+    interface HTMLCvListElement extends Components.CvList, HTMLStencilElement {
+    }
+    var HTMLCvListElement: {
+        prototype: HTMLCvListElement;
+        new (): HTMLCvListElement;
+    };
+    interface HTMLCvListItemElement extends Components.CvListItem, HTMLStencilElement {
+    }
+    var HTMLCvListItemElement: {
+        prototype: HTMLCvListItemElement;
+        new (): HTMLCvListItemElement;
     };
     interface HTMLCvMainElement extends Components.CvMain, HTMLStencilElement {
     }
@@ -107,6 +113,12 @@ declare global {
         prototype: HTMLCvSectionElement;
         new (): HTMLCvSectionElement;
     };
+    interface HTMLCvSectionItemElement extends Components.CvSectionItem, HTMLStencilElement {
+    }
+    var HTMLCvSectionItemElement: {
+        prototype: HTMLCvSectionItemElement;
+        new (): HTMLCvSectionItemElement;
+    };
     interface HTMLCvSidebarElement extends Components.CvSidebar, HTMLStencilElement {
     }
     var HTMLCvSidebarElement: {
@@ -121,11 +133,13 @@ declare global {
     };
     interface HTMLElementTagNameMap {
         "cv-contact-item": HTMLCvContactItemElement;
-        "cv-employment": HTMLCvEmploymentElement;
         "cv-header": HTMLCvHeaderElement;
+        "cv-list": HTMLCvListElement;
+        "cv-list-item": HTMLCvListItemElement;
         "cv-main": HTMLCvMainElement;
         "cv-profile-image": HTMLCvProfileImageElement;
         "cv-section": HTMLCvSectionElement;
+        "cv-section-item": HTMLCvSectionItemElement;
         "cv-sidebar": HTMLCvSidebarElement;
         "cv-skills-list": HTMLCvSkillsListElement;
     }
@@ -134,23 +148,6 @@ declare namespace LocalJSX {
     interface CvContactItem {
         "icon"?: string;
     }
-    interface CvEmployment {
-        /**
-          * @default []
-         */
-        "achievements"?: string[];
-        /**
-          * @default '#2c5f6f'
-         */
-        "bulletColor"?: string;
-        "company"?: string;
-        "period"?: string;
-        "position"?: string;
-        /**
-          * @default '#2c5f6f'
-         */
-        "titleColor"?: string;
-    }
     interface CvHeader {
         /**
           * @default '#2c5f6f'
@@ -158,6 +155,14 @@ declare namespace LocalJSX {
         "color"?: string;
         "jobRole"?: string;
         "name"?: string;
+    }
+    interface CvList {
+    }
+    interface CvListItem {
+        /**
+          * @default '#2c5f6f'
+         */
+        "bulletColor"?: string;
     }
     interface CvMain {
     }
@@ -178,6 +183,15 @@ declare namespace LocalJSX {
         "color"?: string;
         "sectionTitle"?: string;
     }
+    interface CvSectionItem {
+        "heading"?: string;
+        /**
+          * @default '#2c5f6f'
+         */
+        "headingColor"?: string;
+        "period"?: string;
+        "subheading"?: string;
+    }
     interface CvSidebar {
         /**
           * @default 'rgb(218, 228, 235)'
@@ -196,11 +210,13 @@ declare namespace LocalJSX {
     }
     interface IntrinsicElements {
         "cv-contact-item": CvContactItem;
-        "cv-employment": CvEmployment;
         "cv-header": CvHeader;
+        "cv-list": CvList;
+        "cv-list-item": CvListItem;
         "cv-main": CvMain;
         "cv-profile-image": CvProfileImage;
         "cv-section": CvSection;
+        "cv-section-item": CvSectionItem;
         "cv-sidebar": CvSidebar;
         "cv-skills-list": CvSkillsList;
     }
@@ -210,11 +226,13 @@ declare module "@stencil/core" {
     export namespace JSX {
         interface IntrinsicElements {
             "cv-contact-item": LocalJSX.CvContactItem & JSXBase.HTMLAttributes<HTMLCvContactItemElement>;
-            "cv-employment": LocalJSX.CvEmployment & JSXBase.HTMLAttributes<HTMLCvEmploymentElement>;
             "cv-header": LocalJSX.CvHeader & JSXBase.HTMLAttributes<HTMLCvHeaderElement>;
+            "cv-list": LocalJSX.CvList & JSXBase.HTMLAttributes<HTMLCvListElement>;
+            "cv-list-item": LocalJSX.CvListItem & JSXBase.HTMLAttributes<HTMLCvListItemElement>;
             "cv-main": LocalJSX.CvMain & JSXBase.HTMLAttributes<HTMLCvMainElement>;
             "cv-profile-image": LocalJSX.CvProfileImage & JSXBase.HTMLAttributes<HTMLCvProfileImageElement>;
             "cv-section": LocalJSX.CvSection & JSXBase.HTMLAttributes<HTMLCvSectionElement>;
+            "cv-section-item": LocalJSX.CvSectionItem & JSXBase.HTMLAttributes<HTMLCvSectionItemElement>;
             "cv-sidebar": LocalJSX.CvSidebar & JSXBase.HTMLAttributes<HTMLCvSidebarElement>;
             "cv-skills-list": LocalJSX.CvSkillsList & JSXBase.HTMLAttributes<HTMLCvSkillsListElement>;
         }

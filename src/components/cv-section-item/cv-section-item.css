@@ -1,0 +1,34 @@
+:host {
+  font-family: Poppins, sans-serif;
+  --heading-color: #2c5f6f;
+}
+
+.section-item {
+  margin-bottom: 2.5rem;
+}
+
+.section-item-heading {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: var(--heading-color);
+  margin-bottom: 0.25rem;
+  margin-top: 0;
+}
+
+.section-item-subheading {
+  font-size: 1rem;
+  color: #666;
+  font-weight: 400;
+  margin-bottom: 0.25rem;
+}
+
+.section-item-period {
+  font-size: 0.875rem;
+  color: #999;
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+.section-item-content {
+  display: block;
+}
