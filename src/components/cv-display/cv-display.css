@@ -64,6 +64,42 @@
     }
 
     .cv-container {
-        min-height: auto;
+        min-height: 297mm; /* Full A4 page height */
+        height: auto;
+        page-break-inside: auto;
+        break-inside: auto;
+    }
+
+    .main-content {
+        orphans: 3;
+        widows: 3;
+    }
+
+    /* Force sidebar to span full page height */
+    .sidebar-header,
+    .sidebar-content {
+        background: var(--sidebar-background, rgb(218, 228, 235)) !important;
+    }
+
+    .sidebar-content {
+        flex: 1;
+        min-height: 0;
+        padding-bottom: 8rem;
+    }
+
+    .main-content {
+        padding-bottom: 8rem;
+    }
+
+    /* Ensure grid rows properly distribute height */
+    .cv-container {
+        grid-template-rows: auto 1fr !important;
+    }
+
+    /* Ensure clean page breaks */
+    .sidebar-content,
+    .main-content {
+        page-break-inside: auto;
+        break-inside: auto;
     }
 }

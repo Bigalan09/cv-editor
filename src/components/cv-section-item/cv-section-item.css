@@ -1,34 +1,62 @@
 :host {
-  font-family: Poppins, sans-serif;
-  --heading-color: #2c5f6f;
+    font-family: Poppins, sans-serif;
+    --heading-color: #2c5f6f;
 }
 
 .section-item {
-  margin-bottom: 2.5rem;
+    margin-bottom: 2.5rem;
 }
 
 .section-item-heading {
-  font-size: 1.125rem;
-  font-weight: 600;
-  color: var(--heading-color);
-  margin-bottom: 0.25rem;
-  margin-top: 0;
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--heading-color);
+    margin-bottom: 0.25rem;
+    margin-top: 0;
 }
 
 .section-item-subheading {
-  font-size: 1rem;
-  color: #666;
-  font-weight: 400;
-  margin-bottom: 0.25rem;
+    font-size: 1rem;
+    color: #666;
+    font-weight: 400;
+    margin-bottom: 0.25rem;
 }
 
 .section-item-period {
-  font-size: 0.875rem;
-  color: #999;
-  margin-bottom: 1rem;
-  font-weight: 600;
+    font-size: 0.875rem;
+    color: #999;
+    margin-bottom: 1rem;
+    font-weight: 600;
 }
 
 .section-item-content {
-  display: block;
+    display: block;
+}
+
+/* Print-specific page break controls */
+@media print {
+    .section-item {
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+        margin-top: 0;
+        min-height: 5rem; /* Ensure minimum space requirement */
+    }
+
+    /* More aggressive page break control */
+    .section-item:not(:first-child) {
+        page-break-before: auto;
+        break-before: auto;
+    }
+
+    /* Force clean breaks - if an item would create a widow, push to next page */
+    .section-item:nth-child(n + 2) {
+        page-break-before: auto;
+        break-before: auto;
+    }
+
+    /* Ensure first item on a page has no top margin */
+    .section-item:first-child {
+        margin-top: 0 !important;
+        padding-top: 0 !important;
+    }
 }

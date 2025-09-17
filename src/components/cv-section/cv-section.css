@@ -30,3 +30,24 @@
 .section-content {
     display: block;
 }
+
+/* Print-specific page break controls */
+@media print {
+    .section {
+        page-break-inside: auto;
+        break-inside: auto;
+    }
+
+    .section-title {
+        page-break-after: avoid;
+        break-after: avoid;
+        orphans: 2;
+        widows: 2;
+    }
+
+    /* Prevent section titles from being orphaned */
+    .section-title + .section-content {
+        page-break-before: avoid;
+        break-before: avoid;
+    }
+}
