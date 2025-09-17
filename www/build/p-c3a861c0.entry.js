@@ -1,2 +1,0 @@
-import{r as s,h as a,H as c}from"./p-CSdLc4GY.js";const t=":host{font-family:Poppins, sans-serif}.list{list-style:none;padding:0;margin:0}";const e=class{constructor(a){s(this,a)}render(){return a(c,{key:"097a1c916663a128bc3a58f10c2666074cea5b6d"},a("ul",{key:"dcee7c32c7f87463f11f97f503a330a56258c8a1",class:"list"},a("slot",{key:"7249cbd286196b4a2f64c02fa2578614290441aa"})))}};e.style=t;export{e as cv_list};
-//# sourceMappingURL=p-c3a861c0.entry.js.map

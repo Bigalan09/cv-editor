@@ -32,3 +32,13 @@ report.[0-9]_.[0-9]_.[0-9]_.[0-9]_.json
 
 # Finder (MacOS) folder config
 .DS_Store
+
+# StencilJS
+.stencil/
+dist/
+www/
+loader/
+src/components.d.ts
+
+# Auto-generated component docs
+src/components/*/readme.md
