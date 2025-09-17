@@ -27,6 +27,7 @@
     "typescript": "^5"
   },
   "dependencies": {
-    "@stencil/core": "^4.37.0"
+    "@stencil/core": "^4.37.0",
+    "handlebars": "^4.7.8"
   }
 }

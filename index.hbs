@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>CV</title>
+        <link rel="stylesheet" href="reset.css" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+            rel="stylesheet"
+        />
+        <link rel="stylesheet" href="styles.css" />
+        <script type="module" src="/dist/cv-components/cv-components.esm.js"></script>
+    </head>
+    <body>
+        <div class="cv">
+            <cv-sidebar background-color="rgb(218, 228, 235)">
+                <div slot="header">
+                    <cv-profile-image src="{{profile.image}}"></cv-profile-image>
+                </div>
+                <div slot="content">
+                    <cv-section section-title="Contact">
+                        {{#each contact}}
+                        <cv-contact-item icon="{{icon}}">{{{text}}}</cv-contact-item>
+                        {{/each}}
+                    </cv-section>
+
+                    <cv-section section-title="Skills">
+                        <cv-skills-list skills='{{json skills}}'></cv-skills-list>
+                    </cv-section>
+
+                    <cv-section section-title="Interests">
+                        <cv-skills-list skills='{{json interests}}'></cv-skills-list>
+                    </cv-section>
+
+                    <cv-section section-title="References">
+                        <p style="font-size: 0.875rem; color: #666">
+                            {{references}}
+                        </p>
+                    </cv-section>
+                </div>
+            </cv-sidebar>
+
+            <cv-main>
+                <div slot="header">
+                    <cv-header name="{{profile.name}}" job-role="{{profile.jobRole}}">
+                        {{profile.summary}}
+                    </cv-header>
+                </div>
+                <div slot="content">
+                    <cv-section section-title="Employment History">
+                        {{#each employment}}
+                        <cv-section-item
+                            heading="{{position}}"
+                            subheading="{{company}}"
+                            period="{{period}}">
+                            <cv-list>
+                                {{#each achievements}}
+                                <cv-list-item>{{this}}</cv-list-item>
+                                {{/each}}
+                            </cv-list>
+                        </cv-section-item>
+                        {{/each}}
+                    </cv-section>
+                </div>
+            </cv-main>
+        </div>
+    </body>
+</html>
