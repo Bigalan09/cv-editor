@@ -1,12 +1,10 @@
 export { CvDisplay } from "./components/cv-display/cv-display";
-export { CvSidebar } from "./components/cv-sidebar/cv-sidebar";
-export { CvMain } from "./components/cv-main/cv-main";
 export { CvHeader } from "./components/cv-header/cv-header";
 export { CvProfileImage } from "./components/cv-profile-image/cv-profile-image";
 export { CvSection } from "./components/cv-section/cv-section";
-export { CvContactItem } from "./components/cv-contact-item/cv-contact-item";
-export { CvSkillsList } from "./components/cv-skills-list/cv-skills-list";
 export { CvSectionItem } from "./components/cv-section-item/cv-section-item";
 export { CvList } from "./components/cv-list/cv-list";
-export { CvListItem } from "./components/cv-list-item/cv-list-item";
 export { CvIcon } from "./components/cv-icon/cv-icon";
+export { CvGenericSection } from "./components/cv-generic-section/cv-generic-section";
+export { CvSubsection } from "./components/cv-subsection/cv-subsection";
+export { CvListItemGeneric } from "./components/cv-list-item-generic/cv-list-item-generic";

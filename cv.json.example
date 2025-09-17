@@ -5,76 +5,147 @@
     "summary": "As an expert in software development, I possess proven skills in project management, coding, and testing. Over the years, I have successfully led highly focused development teams, building robust and well-performing applications that not only meet specifications but also exceed expectations. With a keen interest in expanding my skill set and refining designs, I am always on the lookout for new opportunities to contribute my expertise and drive success in the ever-evolving field of software development.",
     "image": "https://via.placeholder.com/200x200/4A90A4/FFFFFF?text=JD"
   },
-  "contact": [
+  "sidebar": [
     {
-      "icon": "phone",
-      "text": "+44 20 1234 5678"
-    },
-    {
-      "icon": "house",
-      "text": "123 Example Street,<br />Sample Town, County<br />AB12 3CD"
-    },
-    {
-      "icon": "mail",
-      "text": "john.doe@example.com"
-    },
-    {
-      "icon": "github",
-      "text": "github.com/johndoe"
-    },
-    {
-      "icon": "linkedin",
-      "text": "in/john-doe-123456"
-    }
-  ],
-  "skills": [
-    "Agile Development",
-    "Unit / Integration Testing",
-    "Backend Software Development",
-    "Automated Testing",
-    "Scrum",
-    "Jira",
-    "Git",
-    "Azure DevOps",
-    "Project Planning",
-    "Team Oversight",
-    "JavaScript",
-    "Python",
-    "SQL"
-  ],
-  "interests": [
-    "Photography",
-    "Hiking",
-    "Reading",
-    "Chess"
-  ],
-  "employment": [
-    {
-      "position": "Senior Software Engineer",
-      "company": "Example Tech Company",
-      "period": "January 2020 - Present",
-      "achievements": [
-        "Led a team of 4 developers to successfully deliver a critical product feature on schedule.",
-        "Improved code quality through implementation of automated testing and code review processes.",
-        "Enhanced application performance by 40% through optimisation efforts.",
-        "Mentored junior developers and established best practices for the development team.",
-        "Collaborated with cross-functional teams to define technical requirements and project scope."
+      "title": "Contact",
+      "subsections": [
+        {
+          "content": {
+            "type": "list",
+            "data": [
+              {
+                "bullet": {"icon": "phone"},
+                "value": "+44 20 1234 5678"
+              },
+              {
+                "bullet": {"icon": "house"},
+                "value": "123 Example Street,<br />Sample Town, County<br />AB12 3CD"
+              },
+              {
+                "bullet": {"icon": "mail"},
+                "value": "john.doe@example.com"
+              },
+              {
+                "bullet": {"icon": "github"},
+                "value": "github.com/johndoe"
+              },
+              {
+                "bullet": {"icon": "linkedin"},
+                "value": "in/john-doe-123456"
+              }
+            ]
+          }
+        }
       ]
     },
     {
-      "position": "Software Engineer",
-      "company": "Previous Company Inc",
-      "period": "June 2017 - December 2019",
-      "achievements": [
-        "Developed and maintained web applications using modern frameworks.",
-        "Participated in agile development processes and sprint planning.",
-        "Implemented automated testing strategies to improve code reliability.",
-        "Contributed to system architecture decisions and technical documentation.",
-        "Worked closely with product managers to translate requirements into technical solutions."
+      "title": "Skills",
+      "subsections": [
+        {
+          "content": {
+            "type": "list",
+            "data": [
+              {"bullet": "•", "value": "Agile Development"},
+              {"bullet": "•", "value": "Unit / Integration Testing"},
+              {"bullet": "•", "value": "Backend Software Development"},
+              {"bullet": "•", "value": "Automated Testing"},
+              {"bullet": "•", "value": "Scrum"},
+              {"bullet": "•", "value": "Jira"},
+              {"bullet": "•", "value": "Git"},
+              {"bullet": "•", "value": "Azure DevOps"},
+              {"bullet": "•", "value": "Project Planning"},
+              {"bullet": "•", "value": "Team Oversight"},
+              {"bullet": "•", "value": "JavaScript"},
+              {"bullet": "•", "value": "Python"},
+              {"bullet": "•", "value": "SQL"}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "Interests",
+      "subsections": [
+        {
+          "content": {
+            "type": "list",
+            "data": [
+              {"bullet": "•", "value": "Photography"},
+              {"bullet": "•", "value": "Hiking"},
+              {"bullet": "•", "value": "Reading"},
+              {"bullet": "•", "value": "Chess"}
+            ]
+          }
+        }
       ]
     }
   ],
-  "references": "Available upon request",
+  "main": [
+    {
+      "title": "Employment History",
+      "subsections": [
+        {
+          "title": "Senior Software Engineer",
+          "subtitle": "Example Tech Company",
+          "period": "January 2020 - Present",
+          "content": {
+            "type": "list",
+            "data": [
+              {"bullet": "•", "value": "Led a team of 4 developers to successfully deliver a critical product feature on schedule."},
+              {"bullet": "•", "value": "Improved code quality through implementation of automated testing and code review processes."},
+              {"bullet": "•", "value": "Enhanced application performance by 40% through optimisation efforts."},
+              {"bullet": "•", "value": "Mentored junior developers and established best practices for the development team."},
+              {"bullet": "•", "value": "Collaborated with cross-functional teams to define technical requirements and project scope."}
+            ]
+          }
+        },
+        {
+          "title": "Software Engineer",
+          "subtitle": "Previous Company Inc",
+          "period": "June 2017 - December 2019",
+          "content": {
+            "type": "list",
+            "data": [
+              {"bullet": "•", "value": "Developed and maintained web applications using modern frameworks."},
+              {"bullet": "•", "value": "Participated in agile development processes and sprint planning."},
+              {"bullet": "•", "value": "Implemented automated testing strategies to improve code reliability."},
+              {"bullet": "•", "value": "Contributed to system architecture decisions and technical documentation."},
+              {"bullet": "•", "value": "Worked closely with product managers to translate requirements into technical solutions."}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "Education",
+      "subsections": [
+        {
+          "title": "Bachelor of Science in Computer Science",
+          "subtitle": "University of Example",
+          "period": "September 2013 - June 2017",
+          "content": {
+            "type": "list",
+            "data": [
+              {"bullet": "•", "value": "First Class Honours"},
+              {"bullet": "•", "value": "Relevant modules: Software Engineering, Data Structures, Algorithms"},
+              {"bullet": "•", "value": "Final year project: Machine Learning for Data Analysis"}
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "title": "References",
+      "subsections": [
+        {
+          "content": {
+            "type": "text",
+            "data": "Available upon request"
+          }
+        }
+      ]
+    }
+  ],
   "styling": {
     "colors": {
       "primary": "#666",

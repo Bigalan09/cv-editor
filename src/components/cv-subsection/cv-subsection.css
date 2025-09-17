@@ -1,0 +1,11 @@
+:host {
+  display: block;
+}
+
+p {
+  margin: 0;
+  color: var(--color-primary, #666);
+  font-family: var(--font-family, inherit);
+  font-size: var(--font-size-body, 14px);
+  line-height: var(--line-height-content, 1.6);
+}

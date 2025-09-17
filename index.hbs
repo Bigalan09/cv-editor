@@ -26,42 +26,15 @@
             </cv-header>
 
             <div slot="sidebar-content">
-                <cv-section section-title="Contact">
-                    {{#each contact}}
-                    <cv-contact-item icon="{{icon}}">{{{text}}}</cv-contact-item>
-                    {{/each}}
-                </cv-section>
-
-                <cv-section section-title="Skills">
-                    <cv-skills-list skills='{{json skills}}'></cv-skills-list>
-                </cv-section>
-
-                <cv-section section-title="Interests">
-                    <cv-skills-list skills='{{json interests}}'></cv-skills-list>
-                </cv-section>
-
-                <cv-section section-title="References">
-                    <p style="font-size: 0.875rem; color: #666">
-                        {{references}}
-                    </p>
-                </cv-section>
+                {{#each sidebar}}
+                <cv-generic-section section-title="{{title}}" subsections='{{json subsections}}'></cv-generic-section>
+                {{/each}}
             </div>
 
             <div slot="main-content">
-                <cv-section section-title="Employment History">
-                    {{#each employment}}
-                    <cv-section-item
-                        heading="{{position}}"
-                        subheading="{{company}}"
-                        period="{{period}}">
-                        <cv-list>
-                            {{#each achievements}}
-                            <cv-list-item>{{this}}</cv-list-item>
-                            {{/each}}
-                        </cv-list>
-                    </cv-section-item>
-                    {{/each}}
-                </cv-section>
+                {{#each main}}
+                <cv-generic-section section-title="{{title}}" subsections='{{json subsections}}'></cv-generic-section>
+                {{/each}}
             </div>
         </cv-display>
     </body>

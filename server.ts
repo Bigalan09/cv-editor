@@ -6,6 +6,11 @@ Handlebars.registerHelper("json", function (context) {
   return JSON.stringify(context);
 });
 
+// Register equality helper for conditionals
+Handlebars.registerHelper("eq", function (a, b) {
+  return a === b;
+});
+
 // Helper function to generate CSS custom properties from styling config
 function generateCSSCustomProperties(styling) {
   if (!styling) return "";
