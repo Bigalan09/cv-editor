@@ -1,42 +1,42 @@
 :host {
-  font-family: Poppins, sans-serif;
-  color: #666;
-  font-weight: 300;
+    font-family: var(--font-family, Poppins, sans-serif);
+    color: var(--color-primary, #666);
+    font-weight: var(--font-weight-light, 300);
 }
 
 header {
-  display: block;
+    display: block;
 }
 
 .job-role {
-  font-size: 1.2em;
-  font-weight: 300;
-  letter-spacing: 0.1875em;
-  text-transform: uppercase;
-  margin-bottom: 0.9375rem;
-  margin-top: 0;
+    font-size: var(--font-size-job-role, 1.2em);
+    font-weight: var(--font-weight-light, 300);
+    letter-spacing: var(--letter-spacing-job-role, 0.1875em);
+    text-transform: uppercase;
+    margin-bottom: var(--spacing-job-role-margin-bottom, 0.9375rem);
+    margin-top: 0;
 }
 
 .name {
-  font-size: 2em;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.125em;
-  margin-bottom: 1.25rem;
-  margin-top: 0;
-  position: relative;
+    font-size: var(--font-size-name, 2em);
+    font-weight: var(--font-weight-medium, 500);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-name, 0.125em);
+    margin-bottom: var(--spacing-name-margin-bottom, 1.25rem);
+    margin-top: 0;
+    position: relative;
 }
 
 .name::after {
-  content: "";
-  display: block;
-  width: 3rem;
-  height: 0.11rem;
-  background-color: currentColor;
-  margin: 1.875rem 0 1.875rem 0;
+    content: "";
+    display: block;
+    width: var(--spacing-underline-width, 3rem);
+    height: var(--spacing-name-underline-height, 0.11rem);
+    background-color: currentColor;
+    margin: var(--spacing-name-underline-margin, 1.875rem 0 1.875rem 0);
 }
 
 .content {
-  line-height: 1.6;
-  text-align: justify;
+    line-height: var(--line-height-content, 1.6);
+    text-align: justify;
 }

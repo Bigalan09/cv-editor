@@ -1,23 +1,67 @@
+:root {
+    /* Colors */
+    --color-primary: #666;
+    --color-accent: #2c5f6f;
+    --color-sidebar-background: rgb(218, 228, 235);
+    --color-body-background: rgb(250, 250, 250);
+    --color-bullet: #2c5f6f;
+
+    /* Typography */
+    --font-family: Poppins, sans-serif;
+    --font-weight-light: 300;
+    --font-weight-normal: 400;
+    --font-weight-medium: 500;
+    --font-size-body: 14px;
+    --font-size-name: 2em;
+    --font-size-job-role: 1.2em;
+    --font-size-section-title: 1.125rem;
+    --font-size-list-item: 0.875rem;
+    --line-height-content: 1.6;
+    --line-height-list-item: 1.5;
+    --letter-spacing-name: 0.125em;
+    --letter-spacing-job-role: 0.1875em;
+    --letter-spacing-section-title: 0.125em;
+
+    /* Spacing */
+    --spacing-section-margin-bottom: 2rem;
+    --spacing-section-title-margin-bottom: 1.2rem;
+    --spacing-name-margin-bottom: 1.25rem;
+    --spacing-job-role-margin-bottom: 0.9375rem;
+    --spacing-list-item-margin-bottom: 0.75rem;
+    --spacing-list-item-padding-left: 1rem;
+    --spacing-underline-width: 3rem;
+    --spacing-underline-height: 0.1rem;
+    --spacing-underline-margin-top: 0.85rem;
+    --spacing-name-underline-height: 0.11rem;
+    --spacing-name-underline-margin: 1.875rem 0 1.875rem 0;
+
+    /* Layout */
+    --layout-cv-width: 210mm;
+    --layout-grid-columns: 1fr 2fr;
+    --layout-padding-left: 1.5rem;
+    --layout-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
 body {
     margin: 0;
     padding: 0;
-    font-family: Poppins, sans-serif;
-    font-size: 14px;
-    background-color: rgb(250, 250, 250);
-    color: #666;
-    font-weight: 300;
+    font-family: var(--font-family);
+    font-size: var(--font-size-body);
+    background-color: var(--color-body-background);
+    color: var(--color-primary);
+    font-weight: var(--font-weight-light);
 }
 
 .cv {
     display: grid;
-    grid-template-columns: 1fr 2fr;
+    grid-template-columns: var(--layout-grid-columns);
     grid-template-rows: 1fr;
-    padding-left: 1.5rem;
-    width: 210mm;
+    padding-left: var(--layout-padding-left);
+    width: var(--layout-cv-width);
     margin: 0 auto;
     height: 100%;
     min-height: 100vh;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--layout-box-shadow);
 }
 
 /* Print Styles */
@@ -34,10 +78,10 @@ body {
     }
 
     .cv {
-        width: 210mm !important;
+        width: var(--layout-cv-width) !important;
         max-width: none !important;
         margin: 0 !important;
-        padding-left: 1.5rem !important;
+        padding-left: var(--layout-padding-left) !important;
         box-shadow: none !important;
         min-height: auto !important;
         height: auto !important;

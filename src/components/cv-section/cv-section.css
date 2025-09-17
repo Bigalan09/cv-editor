@@ -1,32 +1,32 @@
 :host {
-  font-family: Poppins, sans-serif;
-  color: #666;
-  font-weight: 300;
+    font-family: var(--font-family, Poppins, sans-serif);
+    color: var(--color-primary, #666);
+    font-weight: var(--font-weight-light, 300);
 }
 
 .section {
-  margin-bottom: 2rem;
+    margin-bottom: var(--spacing-section-margin-bottom, 2rem);
 }
 
 .section-title {
-  font-size: 1.125rem;
-  font-weight: 500;
-  text-transform: uppercase;
-  letter-spacing: 0.125em;
-  margin-bottom: 1.2rem;
-  margin-top: 0;
-  position: relative;
+    font-size: var(--font-size-section-title, 1.125rem);
+    font-weight: var(--font-weight-medium, 500);
+    text-transform: uppercase;
+    letter-spacing: var(--letter-spacing-section-title, 0.125em);
+    margin-bottom: var(--spacing-section-title-margin-bottom, 1.2rem);
+    margin-top: 0;
+    position: relative;
 }
 
 .section-title::after {
-  content: "";
-  display: block;
-  width: 3rem;
-  height: 0.1rem;
-  background-color: currentColor;
-  margin-top: 0.85rem;
+    content: "";
+    display: block;
+    width: var(--spacing-underline-width, 3rem);
+    height: var(--spacing-underline-height, 0.1rem);
+    background-color: currentColor;
+    margin-top: var(--spacing-underline-margin-top, 0.85rem);
 }
 
 .section-content {
-  display: block;
+    display: block;
 }

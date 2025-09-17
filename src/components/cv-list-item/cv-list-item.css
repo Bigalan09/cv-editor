@@ -1,21 +1,21 @@
 :host {
-  font-family: Poppins, sans-serif;
-  --bullet-color: #2c5f6f;
+    font-family: var(--font-family, Poppins, sans-serif);
+    --bullet-color: var(--color-bullet, #2c5f6f);
 }
 
 .list-item {
-  margin-bottom: 0.75rem;
-  font-size: 0.875rem;
-  color: #666;
-  line-height: 1.5;
-  position: relative;
-  padding-left: 1rem;
+    margin-bottom: var(--spacing-list-item-margin-bottom, 0.75rem);
+    font-size: var(--font-size-list-item, 0.875rem);
+    color: var(--color-primary, #666);
+    line-height: var(--line-height-list-item, 1.5);
+    position: relative;
+    padding-left: var(--spacing-list-item-padding-left, 1rem);
 }
 
 .list-item::before {
-  content: "•";
-  color: var(--bullet-color);
-  position: absolute;
-  left: 0;
-  top: 0;
+    content: "•";
+    color: var(--bullet-color);
+    position: absolute;
+    left: 0;
+    top: 0;
 }

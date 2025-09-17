@@ -1,22 +1,22 @@
 :host {
-  font-family: Poppins, sans-serif;
+    font-family: var(--font-family, Poppins, sans-serif);
 }
 
 .contact-item {
-  display: flex;
-  align-items: center;
-  margin-bottom: 1rem;
-  font-size: 0.875rem;
-  color: #666;
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    font-size: var(--font-size-list-item, 0.875rem);
+    color: var(--color-primary, #666);
 }
 
 .contact-icon {
-  width: 1.25rem;
-  height: 1.25rem;
-  margin-right: 0.75rem;
-  flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-right: 0.75rem;
+    flex-shrink: 0;
 }
 
 .contact-content {
-  flex: 1;
+    flex: 1;
 }
