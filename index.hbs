@@ -16,10 +16,14 @@
             {{{customCSS styling}}}
         </style>
         <script type="module" src="/dist/cv-components/cv-components.esm.js"></script>
+        <script src="export.js"></script>
     </head>
     <body>
         <div id="cv-controls">
             <a href="/edit" class="edit-btn">Edit CV</a>
+            <div class="export-dropdown">
+                <button id="export-dropdown-btn" class="export-btn dropdown-toggle">Export</button>
+            </div>
         </div>
         <cv-display>
             <cv-profile-image slot="sidebar-header" src="{{profile.image}}"></cv-profile-image>

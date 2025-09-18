@@ -1,5 +1,6 @@
 import { serve } from "bun";
 const Handlebars = require("handlebars");
+const puppeteer = require("puppeteer");
 
 // Register JSON helper for handlebars
 Handlebars.registerHelper("json", function (context) {
@@ -89,10 +90,104 @@ Handlebars.registerHelper("customCSS", function (styling) {
 const templateFile = Bun.file("index.hbs");
 const cvDataFile = Bun.file("cv.json");
 
+// PDF Generation function
+async function generatePDF(singlePageMode = true) {
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+  });
+
+  try {
+    const page = await browser.newPage();
+
+    // Load the CV page
+    await page.goto("http://localhost:3000/", {
+      waitUntil: "networkidle0",
+    });
+
+    // Add single-page mode class if requested
+    if (singlePageMode) {
+      await page.evaluate(() => {
+        document.body.classList.add("single-page-mode");
+      });
+    }
+
+    // Wait for web components to load
+    await page.waitForSelector("cv-display", { timeout: 10000 });
+
+    // Generate PDF
+    const pdfOptions = {
+      format: "A4",
+      printBackground: true,
+      preferCSSPageSize: true,
+      displayHeaderFooter: false,
+    };
+
+    if (singlePageMode) {
+      // For single page mode, set height to fit content with no margins
+      pdfOptions.height = await page.evaluate(() => {
+        return Math.max(
+          document.documentElement.scrollHeight,
+          document.body.scrollHeight,
+        );
+      });
+      pdfOptions.width = "210mm";
+      pdfOptions.margin = {
+        top: "0",
+        bottom: "0",
+        left: "0",
+        right: "0",
+      };
+      delete pdfOptions.format;
+    } else {
+      // For multi-page mode, use standard margins
+      pdfOptions.margin = {
+        top: "0.5in",
+        bottom: "0.5in",
+        left: "0.5in",
+        right: "0.5in",
+      };
+    }
+
+    const pdfBuffer = await page.pdf(pdfOptions);
+    return pdfBuffer;
+  } finally {
+    await browser.close();
+  }
+}
+
 serve({
   port: 3000,
   async fetch(req) {
     const url = new URL(req.url);
+
+    // PDF Export Routes
+    if (url.pathname === "/api/cv/export/pdf") {
+      try {
+        const singlePage = url.searchParams.get("mode") !== "print";
+        const pdfBuffer = await generatePDF(singlePage);
+
+        const cvData = await cvDataFile.json();
+        const filename = `CV_${cvData.profile?.name?.replace(/\s+/g, "_") || "CV"}.pdf`;
+
+        return new Response(pdfBuffer, {
+          headers: {
+            "Content-Type": "application/pdf",
+            "Content-Disposition": `attachment; filename="${filename}"`,
+            "Content-Length": pdfBuffer.length.toString(),
+          },
+        });
+      } catch (error) {
+        console.error("PDF generation error:", error);
+        return new Response(
+          JSON.stringify({ success: false, error: error.message }),
+          {
+            status: 500,
+            headers: { "Content-Type": "application/json" },
+          },
+        );
+      }
+    }
 
     // API Routes
     if (url.pathname === "/api/cv/data") {
@@ -286,6 +381,12 @@ serve({
 
     if (url.pathname === "/editor.js") {
       return new Response(Bun.file("editor.js"), {
+        headers: { "Content-Type": "application/javascript" },
+      });
+    }
+
+    if (url.pathname === "/export.js") {
+      return new Response(Bun.file("export.js"), {
         headers: { "Content-Type": "application/javascript" },
       });
     }

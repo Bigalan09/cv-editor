@@ -38,8 +38,20 @@
     .section-item {
         page-break-inside: avoid !important;
         break-inside: avoid !important;
-        margin-top: 0;
-        min-height: 5rem; /* Ensure minimum space requirement */
+        margin-top: 0.5rem;
+        min-height: 4rem; /* Ensure minimum space requirement */
+    }
+
+    /* Add top margin to section item headings that appear at top of page */
+    .section-item-heading {
+        margin-top: 1.5rem;
+        page-break-after: avoid;
+        break-after: avoid;
+    }
+
+    /* Remove top margin for very first item on page */
+    .section-item:first-child .section-item-heading {
+        margin-top: 0 !important;
     }
 
     /* More aggressive page break control */
@@ -52,11 +64,5 @@
     .section-item:nth-child(n + 2) {
         page-break-before: auto;
         break-before: auto;
-    }
-
-    /* Ensure first item on a page has no top margin */
-    .section-item:first-child {
-        margin-top: 0 !important;
-        padding-top: 0 !important;
     }
 }

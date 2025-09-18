@@ -18,6 +18,7 @@
             {{{customCSS styling}}}
         </style>
         <script type="module" src="/dist/cv-components/cv-components.esm.js"></script>
+        <script src="export.js"></script>
     </head>
     <body>
         <div id="edit-container">
@@ -30,6 +31,9 @@
                 <div class="toolbar-right">
                     <a href="/" class="btn btn-secondary">View CV</a>
                     <button id="create-backup-btn" class="btn btn-secondary">Create Backup</button>
+                    <div class="export-dropdown">
+                        <button id="edit-export-dropdown-btn" class="btn btn-secondary dropdown-toggle">Export</button>
+                    </div>
                     <button id="manual-save-btn" class="btn btn-primary">Save Changes</button>
                 </div>
             </div>
