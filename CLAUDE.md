@@ -135,6 +135,33 @@ bun run server.ts
 bun --hot server.ts
 ```
 
+### Editor Interface
+
+The CV Editor includes a built-in web-based editor accessible at `/edit`:
+
+- **Split-view interface**: JSON editor with live preview
+- **Monaco Editor**: Syntax highlighting and validation for JSON editing
+- **Auto-save functionality**: Changes saved automatically with backup creation
+- **Form editor**: Alternative interface for non-technical users
+- **Export controls**: Direct PDF generation from the editor interface
+
+### PDF Generation
+
+Automated PDF export with Puppeteer:
+
+- **Single-page mode**: Optimised for one-page CVs with dynamic height
+- **Print mode**: Multi-page support with proper page breaks
+- **API endpoint**: `/api/cv/export/pdf` with mode parameter
+- **Filename generation**: Uses profile name for automatic file naming
+- **Background preservation**: Maintains colours and styling in PDF output
+
+### Styling Considerations
+
+- **CSS Custom Properties**: All styling converted to CSS variables for component consumption
+- **Shadow DOM compatibility**: Components inherit global CSS variables
+- **Print-optimised**: A4 format with proper margins and background handling
+- **Dynamic injection**: Handlebars helper generates CSS from JSON config
+
 ### Generic Component System
 
 **Core Layout:**
