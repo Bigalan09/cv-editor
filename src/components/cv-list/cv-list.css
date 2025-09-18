@@ -1,9 +1,13 @@
 :host {
-  font-family: Poppins, sans-serif;
+    font-family: Poppins, sans-serif;
 }
 
 .list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.list strong {
+    font-weight: 500;
 }

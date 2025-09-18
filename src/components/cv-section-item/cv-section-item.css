@@ -4,29 +4,29 @@
 }
 
 .section-item {
-    margin-bottom: 2.5rem;
+    margin-bottom: 2.25rem;
 }
 
 .section-item-heading {
     font-size: 1.125rem;
     font-weight: 600;
     color: var(--heading-color);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.35rem;
     margin-top: 0;
 }
 
 .section-item-subheading {
     font-size: 1rem;
     color: #666;
-    font-weight: 400;
-    margin-bottom: 0.25rem;
+    font-weight: 200;
+    margin-bottom: 0.35rem;
 }
 
 .section-item-period {
     font-size: 0.875rem;
-    color: #999;
-    margin-bottom: 1rem;
-    font-weight: 600;
+    color: #555;
+    margin-bottom: 0.75rem;
+    font-weight: 400;
 }
 
 .section-item-content {
