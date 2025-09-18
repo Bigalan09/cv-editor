@@ -398,6 +398,27 @@ serve({
       });
     }
 
+    // Serve image files
+    if (url.pathname.match(/\.(jpg|jpeg|png|gif|webp)$/i)) {
+      const filePath = url.pathname.slice(1); // Remove leading slash
+      const file = Bun.file(filePath);
+
+      if (await file.exists()) {
+        const ext = url.pathname.split(".").pop().toLowerCase();
+        const mimeTypes = {
+          jpg: "image/jpeg",
+          jpeg: "image/jpeg",
+          png: "image/png",
+          gif: "image/gif",
+          webp: "image/webp",
+        };
+
+        return new Response(file, {
+          headers: { "Content-Type": mimeTypes[ext] || "image/jpeg" },
+        });
+      }
+    }
+
     return new Response("Not Found", { status: 404 });
   },
 });
